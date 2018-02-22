@@ -7,9 +7,9 @@ class FlashCards
         @questions = @cards.keys
         @seenQuestions = []
         @questionsArray = true;
-        @most = 0
         @last = nil;
     end
+
     def start()
         input = ''
         puts 'welcome to Tcards'
@@ -30,10 +30,10 @@ class FlashCards
         puts 'press a for answer and next question q to quit'
         while (input != 'q')
             q = getmostUnseen()
-            puts "\n\n#{q}\n\n"
+            puts "\n\n#{@cards[q]['question']}\n\n"
             input = gets.chomp()
             if (input == 'a')
-                puts @cards[q]
+                puts @cards[q]['answer']
             end
         end
         
