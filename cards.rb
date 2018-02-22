@@ -8,6 +8,7 @@ class FlashCards
         @seenQuestions = []
         @questionsArray = true;
         @most = 0
+        @last = nil;
     end
     def start()
         input = ''
@@ -29,7 +30,7 @@ class FlashCards
         puts 'press a for answer and next question q to quit'
         while (input != 'q')
             q = getmostUnseen()
-            p '','',q,'','',''
+            puts "\n\n#{q}\n\n"
             input = gets.chomp()
             if (input == 'a')
                 puts @cards[q]
@@ -41,12 +42,12 @@ class FlashCards
     def getmostUnseen()
         q = nil
         if (@questionsArray)
-            q = @questions.pop()
+            q = @questions.slice!(rand(@questions.length))
             @seenQuestions.push(q)
             @questionsArray = !@questionsArray if (@questions.empty?)
             
         else
-            q = @seenQuestions.pop()
+            q = @seenQuestions.slice!(rand(@seenQuestions.length))
             @questions.push(q)
             @questionsArray = !@questionsArray if (@seenQuestions.empty?)
         end

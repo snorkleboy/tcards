@@ -9,7 +9,7 @@
 
     "Explain prototypes in JavaScript." : "every object has a prototype reference. When object.method() is called it, if its not found on object it will be looked for on object.prototype then object.prototype.prototype and so on. Prototype is an object itself, so while it performs a similar purpose to a parent class in classical inheritence, its very different.\njs classes are build from constructors that set up a 'this' (i.e function that(a){this.a=a}), and when called like 'new that()' the new keyword sets the prototype of a new object to that.prototype and sets this objects properties using the constructor",
 
-    "List the key benefits that HTML5 introduced.": "1) new semantic tags\n 2) new video and audio support\n, 3) canvas\n, 4)contenteditable='true'\n,5)'required' attribute\n,6)autofocus\n7)placeholder\n8)accessibility",
+    "List the key benefits that HTML5 introduced.": "1)new semantic tags\n2)new video and audio support\n3)canvas\n4)contenteditable='true'\n5)'required' attribute\n6)autofocus\n7)placeholder\n8)accessibility",
 
 
     "How do media queries work ?":"you create a new scope in css based on properties like @media (min-width: 600px), which will select any time width is a minimum of 600px. Generally advised to have mobile size be standard CSS and then buetify as screen gets larger"
