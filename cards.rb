@@ -12,17 +12,16 @@ class FlashCards
 
     def start()
         input = ''
-        puts 'welcome to Tcards'
+        puts 'welcome to Tcards\n'
         while input != 'q'
-            puts 'random(r) \nby topic(t) \nby unknown amount\n\n only r works for now'
-            input = gets.chomp
+            puts "random(r) \nby topic(t) \nby unknown amount(u)\n\nonly r works for now"
+            input = STDIN.gets.chomp
             case input
                 when 'r'
                     random()
                 else
                     input = 'q'
             end
-
         end
     end
     def random()
@@ -56,21 +55,3 @@ class FlashCards
 end
 
 
-filePath = File.join(File.dirname(__FILE__),'/Cards.json')
-data = ''
-File.open(filePath, "r") do |f|
-  f.each_line do |line|
-    data.concat(line)
-  end
-end
-cards = JSON.parse(data)['cards']
-FlashCards.new(cards).start
-
-
-
-
-
-# while (line = fileObj.gets)
-#   puts(line)
-# end
-# fileObj.close

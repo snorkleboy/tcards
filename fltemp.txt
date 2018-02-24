@@ -1,0 +1,26 @@
+Explain the different ways that graphs can be represented. What are the pros and cons of various ways of representing graphs.
+What does it mean to be RESTful?
+Explain prototypes in JavaScript.
+List the key benefits that HTML5 introduced.
+How do media queries work?
+
+What's a closure? How are they used?
+Give a high level overview of how CSS grids work.
+
+What are the steps for DFS on a graph?
+What happens when you type in www.google.com and hit enter?
+What's the event loop? How does it work?
+
+Explain the steps of topological sort.
+
+What is TCP? When is it used? How does it work?
+What's an IFFE? When would you use it?
+
+What lifecycle methods get called in the update phase? What are the use cases for each of those methods? What method gets called in the unmounting phase?
+
+Explain the steps of topological sort.
+
+What is UDP? When would you use it?
+
+
+
