@@ -15,7 +15,7 @@ class FlashCards
         input = ''
         puts "welcome to Tcards\n\nq to quit\n"
         while input != 'q'
-            puts "see all(s)-see all \nwrite(w)- make new cards \nrandom(r) -randomly choose cards\nby topic(t) -choose cards by topic\nby unknown(u) -choose randomly biased towards unknown\n\n"
+            puts "See all(s)-see all \nWrite(w)- make new cards \nRandom(r) -randomly choose cards\n\n\n"
             input = STDIN.gets.chomp
             case input
                 when 'r'
