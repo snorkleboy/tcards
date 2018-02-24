@@ -85,11 +85,12 @@ class FlashCards
     end
     def getCard()
         satisfied = false
-        while (!satisfied)
-            puts "enter question"
-            question = gets.chomp
-            puts "enter answer"
-            answer = gets.chomp
+        input = ''
+        while (!satisfied && input != 'q')
+            puts "enter question (tab enter to finish string)"
+            question = gets("\t\n").chomp
+            puts "enter answer (tab enter to finish string)"
+            answer = gets("\t\n").chomp
             puts "enter how well you know it"
             know = gets.chomp
             input = {"question"=>question,"answer"=>answer,"know"=>know}    

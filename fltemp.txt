@@ -3,18 +3,45 @@
 
 
 
-What's the event loop? How does it work?
+
 
 Explain the steps of topological sort.
 
+topological sort is only possible with no cycles, a directed acyclical graph (dag). This means that the vertexes can be ordered by dependency much like a tree.
+Khans algorithm relies on the fact that a dag must have atleast one node with 0 outgoing connections, as a dag always has atleast one destinct path beginning and path ending. 
+If you remove all nodes with no outgoing connections, in a dag, you are guerenteed to get atleast one more node with no outgiong connections, the next step of the ends of the paths you just removed.
+If you remove nodes like this until you have no more nodes you have the reverse order of a topological a sort. 
+
+
 What is TCP? When is it used? How does it work?
+
+TCP is a protocol built over the IP protocol with reliability and connection being the priorities (as opposed to raw speed). As far as were concerned the most important aspects of TCP is a tcp header which allows numbers packets, allowing a tcp socket to to send ackoledgements of each packet and reconstruct the original message. 
+TCP works by first doing a ip handshake, which is 1=>syn 2=> ack, syn 1=> ack 2, after which it is a reliable tcp based connection
+
 What's an IFFE? When would you use it?
+
+immedietely invoked function. (function(){})(). You can use it as a wrapper for the whole file to not put variables into global scope, or inside for(var i =0...){(function(j){})(i)} to preserve a value of i.
 
 What lifecycle methods get called in the update phase? What are the use cases for each of those methods? What method gets called in the unmounting phase?
 
-Explain the steps of topological sort.
+componentWillMount(): nothing on the dom yet, not called with anything, rarely used, sometimes connect to api if persistent connection needed
+
+didMount(): component has just been mounted, you can set state in this hook, doing something like api.fetch.then((r)=>setstate(r)) which will cause a rerender:
+
+willReceiveProps(newprops): recieves new props (not called on intitial render), has access to this.props which is old props. good place to do non DOM update, like if you have a canvas or something
+
+shouldUpdate(nextProps,nextState): if this returns false the component will not rerender. Otherwise any state change or rerender of parent will cause this to rerender
+
+willUpdate: rarely used. If shouldUpdate is used, this may be used instead of WillReceiveProps to update non dom elements
+
+render:
+
+didUpdate: not used a ton. called after render, useful as dom is in final state so if you need to do adjustments after dom building this would be a good place
+
+willUmount: if you need to unbind eventhandlers or destroy a process or something
+
+
 
 What is UDP? When would you use it?
 
-
-
+udp is a connectionless version of TCP that doesnt add as much to the underlying ip protocol. It seperates process' by port like tcp, allowing multiplexing, and provides a checksum for itegrity and thats about it. No gaurentee of order or recieval, which is good for times you want to handle that yourself or it is not needed (one example is single packet transmissions like DNS lookups)
