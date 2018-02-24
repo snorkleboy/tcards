@@ -10,8 +10,6 @@ class PGAPI
         begin
             con = PG.connect :dbname => db, :user => user, 
                 :password => password
-
-
             
         rescue PG::Error => e
             puts e.message     

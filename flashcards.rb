@@ -13,18 +13,24 @@ class FlashCards
 
     def start()
         input = ''
-        puts 'welcome to Tcards\n\nq to quit\n'
-        sleep(1.4)
+        puts "welcome to Tcards\n\nq to quit\n"
         while input != 'q'
-            puts "random(r) \nby topic(t) \nby unknown amount(u)\n\nonly r works for now"
+            puts "see all(s)-see all \nwrite(w)- make new cards \nrandom(r) -randomly choose cards\nby topic(t) -choose cards by topic\nby unknown(u) -choose randomly biased towards unknown\n\n"
             input = STDIN.gets.chomp
             case input
                 when 'r'
                     random()
+                when 'w'
+                    write()
+                when 's'
+                    see()
                 else
                     input = 'q'
             end
         end
+    end
+    def see()
+        @cards.each{|card| card=card[1]; puts "question:\n#{card['question']}\n\nanswer:\n#{card['answer']}\n\nknow:\n#{card['know']}\n\n\n" }
     end
     def random()
         input = ''
@@ -61,6 +67,38 @@ class FlashCards
             @questionsArray = !@questionsArray if (@seenQuestions.empty?)
         end
         return q
+    end
+    def write()
+        input = ''
+        keys = @cards.keys.map{|key| key.to_i}
+        p 'enter cards?(y/n)'
+        input = gets.chomp
+        while(input == 'y')
+            card = getCard
+            keys.push(keys[-1]+1)
+            @cards[keys[-1]] = card
+            p 'enter another card?(y/n)'
+            input = gets.chomp
+        end
+
+        @writer.write(@cards) unless input == 'q'
+    end
+    def getCard()
+        satisfied = false
+        while (!satisfied)
+            puts "enter question"
+            question = gets.chomp
+            puts "enter answer"
+            answer = gets.chomp
+            puts "enter how well you know it"
+            know = gets.chomp
+            input = {"question"=>question,"answer"=>answer,"know"=>know}    
+            p input
+            p "satisfied?(y/n)"
+            if (gets.chomp == 'y')
+                return input
+            end
+        end
     end
 end
 

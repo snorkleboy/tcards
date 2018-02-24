@@ -20,9 +20,10 @@ class FileReaderAPI
     end
 
     def write(cards)
-        FileReaderAPI.write(@filepath,cards)
+        FileReaderAPI.write(@filePath,cards)
     end
     def self.write(file,cards)
+        cards = {"cards"=>cards}
         File.open(file,"w") do |f|
             f.write(cards.to_json)
         end
