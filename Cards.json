@@ -24,6 +24,31 @@
         "question":"How do media queries work ?",
         "answer":"you create a new scope in css based on properties like @media (min-width: 600px), which will select any time width is a minimum of 600px. Generally advised to have mobile size be standard CSS and then buetify as screen gets larger",
         "know":"10"
+    },
+    "6":{
+        "question":"What's a closure? How are they used?",
+        "answer":"a closure is when a function retains access to the scope it was defined in alongside the scope its invoked. Its used in everything from higher order functions like thunks, where the returned function retains a reference to its parent functions input parameters, to using private-like varaibles above classes",
+        "know":"10"
+    },
+    "7":{
+        "question": "Give a high level overview of how CSS grids work.",
+        "answer":"some wrapper element has display:grid and some css to define its layout with a pretty powerful api. Each child element can either adhere to standard rules or define its own css row and column",
+        "know": "3"
+    },
+    "8":{
+        "question": "What are the steps for DFS on a graph?",
+        "answer": "you go to a child, you go to the childs child, etc. If you are looking for a specific value mark nodes as visited as you go and add children-to-visit as you go. If the first path reaches a dead end, go backwards and start over from the last to-visit child thats not already visited.",
+        "know": "8"
+    },
+    "9":{
+        "question":"What happens when you type in www.google.com and hit enter?",
+        "answer": "your browser attempts to open a socket to www.google.com on port 80. First a DNS lookup is done:\n1) First the browser checks a series of caches, which 'google.com' will probably be in. If the ip adress isnt there you query a DNS resolver with the url, usually your ISP over UDP port 53\n2)DNS resolver starts querying a heirarchy of root servers eventually getting to a .com server which knows a name server which knows the url\n3)After the DNS resolver returns an IP address the browser is able to start opening a connection to the socket hopefully listening on the other end of the ip address and port 80. It starts a TCP/ip handshake\n3a)browser sends a syn (sync) packet,\n3b}upon reciept server sends a ack(acknoledge) and a syn packet\n3c)upon receipt of ack and syn browser sends an ack\n3d)connection is made\n4)once the TCP connection is established the browser will send a HTTP GET request to www.google.com\n5)the server recieves and parses the get request eventually returning a response of some files, atleast one of which is an html file for the browser to display googles homepage and closing its connection\n6)the browser parses the html,the css , and renders a dom. This process involves loading files as needed, so embedding smaller files or non-blocking javascript will improve load time.",
+        "know": "7"
+    },
+    "10":{
+        "question":"What's the event loop? How does it work?",
+        "answer": "the event loop is a event based model of concurenccy. beside the main call stack is an messageQueue which can be filled with messages with callbacks. when the main call stack is empty ready messages are popped off the queue and their callbacks are added to the call stack. this allows for non-blocking asynchronous operations and makes event based programming simple.",
+        "know":"6"
     }
 }
 }

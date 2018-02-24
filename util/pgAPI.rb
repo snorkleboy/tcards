@@ -11,13 +11,7 @@ class PGAPI
             con = PG.connect :dbname => db, :user => user, 
                 :password => password
 
-            user = con.user
-            db_name = con.db
-            pswd = con.pass
-            
-            puts "User: #{user}"
-            puts "Database name: #{db_name}"
-            puts "Password: #{pswd}" 
+
             
         rescue PG::Error => e
             puts e.message     

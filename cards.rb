@@ -2,17 +2,19 @@
 require 'json'
 
 class FlashCards
-    def initialize(cards)
+    def initialize(cards,writer)
         @cards = cards
         @questions = @cards.keys
         @seenQuestions = []
         @questionsArray = true;
         @last = nil;
+        @writer = writer
     end
 
     def start()
         input = ''
-        puts 'welcome to Tcards\n'
+        puts 'welcome to Tcards\n\nq to quit\n'
+        sleep(1.4)
         while input != 'q'
             puts "random(r) \nby topic(t) \nby unknown amount(u)\n\nonly r works for now"
             input = STDIN.gets.chomp
@@ -26,16 +28,24 @@ class FlashCards
     end
     def random()
         input = ''
-        puts 'press a for answer and next question q to quit'
         while (input != 'q')
+             system "clear"
+            puts "press a for answer and n for next question\n\n"
             q = getmostUnseen()
-            puts "\n\n#{@cards[q]['question']}\n\n"
+            puts "#{@cards[q]['question']}\n\n"
             input = gets.chomp()
-            if (input == 'a')
-                puts @cards[q]['answer']
+            while (input != 'n')
+                if (input == 'a')
+                    puts @cards[q]['answer']
+                    input = nil
+                end
+                if (input == 'q')
+                    return
+                end
+                input = gets.chomp()
             end
+           
         end
-        
     end
 
     def getmostUnseen()
