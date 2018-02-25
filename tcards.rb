@@ -12,8 +12,9 @@ begin
         database,username,password = ARGV[1..3]
         pg = PGAPI.new()
         pg.migrateFromFile(ARGV[5]) if ARGV[4]  == '-m'
-        cards={}
+        cards= pg.getCards
         writer = pg
+        p 'here'
     else
         path = ARGV[1] || './Cards.json'
         # path = File.join(File.dirname(__FILE__),path)

@@ -1,6 +1,6 @@
 require 'pg'
 require_relative './fileReaderAPI.rb'
-
+require 'json'
 class PGAPI
 
     def initialize(db="flashcards",user='snorkleboy',password='')
@@ -20,7 +20,6 @@ class PGAPI
     def migrateFromFile(path = "./Cards.json")
         p 'this will overwrite the cards table, are you sure?(y)'
         return false if (STDIN.gets.chomp != 'y')
-        p path
         cards = FileReaderAPI.getCards(path)
         @con.exec "DROP TABLE IF EXISTS Cards"
         @con.exec "CREATE TABLE Cards(id INTEGER PRIMARY KEY, question TEXT,answer TEXT, know INT)"
@@ -36,6 +35,15 @@ class PGAPI
         SQL
         @con.exec_params sql ,[key, card['question'], card['answer'], card['know']]
 
+    end
+
+    def getCards()
+        cardsRAW = @con.exec("SELECT * FROM cards")
+        cards = {}
+        cardsRAW.each do |tuple|
+            cards[tuple['id']]={'question'=>tuple['question'],'answer'=>tuple['answer'],'know'=>tuple['know']}
+        end
+        cards
     end
 
 end

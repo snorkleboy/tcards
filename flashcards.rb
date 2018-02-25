@@ -35,11 +35,11 @@ class FlashCards
     def random()
         input = ''
         while (input != 'q')
-             system "clear"
+            system "clear"
             puts "press a for answer and n for next question\n\n"
             q = getmostUnseen()
             puts "#{@cards[q]['question']}\n\n"
-            input = gets.chomp()
+            input = STDIN.gets.chomp()
             while (input != 'n')
                 if (input == 'a')
                     puts @cards[q]['answer']
@@ -48,7 +48,7 @@ class FlashCards
                 if (input == 'q')
                     return
                 end
-                input = gets.chomp()
+                input = STDIN.gets.chomp()
             end
            
         end
@@ -72,13 +72,13 @@ class FlashCards
         input = ''
         keys = @cards.keys.map{|key| key.to_i}
         p 'enter cards?(y/n)'
-        input = gets.chomp
+        input = STDIN.gets.chomp
         while(input == 'y')
             card = getCard
             keys.push(keys[-1]+1)
             @cards[keys[-1]] = card
             p 'enter another card?(y/n)'
-            input = gets.chomp
+            input = STDIN.gets.chomp
         end
 
         @writer.write(@cards) unless input == 'q'
@@ -88,15 +88,15 @@ class FlashCards
         input = ''
         while (!satisfied && input != 'q')
             puts "enter question (tab enter to finish string)"
-            question = gets("\t\n").chomp
+            question = STDIN.gets("\t\n").chomp
             puts "enter answer (tab enter to finish string)"
-            answer = gets("\t\n").chomp
+            answer = STDIN.gets("\t\n").chomp
             puts "enter how well you know it"
-            know = gets.chomp
+            know = STDIN.gets.chomp
             input = {"question"=>question,"answer"=>answer,"know"=>know}    
             p input
             p "satisfied?(y/n)"
-            if (gets.chomp == 'y')
+            if (STDIN.gets.chomp == 'y')
                 return input
             end
         end
