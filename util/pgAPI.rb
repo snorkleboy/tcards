@@ -3,7 +3,10 @@ require_relative './fileReaderAPI.rb'
 require 'json'
 class PGAPI
 
-    def initialize(db="flashcards",user='snorkleboy',password='')
+    def initialize(db,user,password)
+        db ||= 'flashcards'
+        user ||= 'snorkleboy'
+        password ||= ''
         @con = nil
         connect(db,user,password)
     end

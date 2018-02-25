@@ -10,11 +10,10 @@ writer = Proc.new{p 'no write proc provided'}
 begin
     if ARGV[0] == "-p"
         database,username,password = ARGV[1..3]
-        pg = PGAPI.new()
-        pg.migrateFromFile(ARGV[5]) if ARGV[4]  == '-m'
+        pg = PGAPI.new(database,username,password)
+        pg.migrateFromFile(ARGV[5]) if ARGV[4]  == '-m' || ARGV[2] == '-m'
         cards= pg.getCards
         writer = pg
-        p 'here'
     else
         path = ARGV[1] || './Cards.json'
         # path = File.join(File.dirname(__FILE__),path)
