@@ -6,12 +6,13 @@ require_relative './util/pgAPI.rb'
 require_relative './util/fileReaderAPI.rb'
 
 cards = {}
-writer = Proc.new{p 'no write proc provided'}
+writer = nil
 begin
     if ARGV[0] == "-p"
-        database,username,password = ARGV[1..3]
+        database,username,password = ARGV[1] == '-r' || ARGV[1]  == 'm' ? [nil,nil,nil] : ARGV[1..3] 
         pg = PGAPI.new(database,username,password)
-        pg.migrateFromFile(ARGV[5]) if ARGV[4]  == '-m' || ARGV[2] == '-m'
+        pg.migrateFromFile(ARGV[5]) if ARGV[4]  == '-m' || ARGV[1] == '-m'
+        pg.writeFileFromPG(ARGV[5]) if ARGV[4]  == '-r' || ARGV[1] == '-r'
         cards= pg.getCards
         writer = pg
     else

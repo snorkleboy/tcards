@@ -20,7 +20,8 @@ class PGAPI
             puts e.message      
         end
     end
-    def migrateFromFile(path = "./Cards.json")
+    def migrateFromFile(path)
+        path ||= "./Cards.json"
         p 'this will overwrite the cards table, are you sure?(y)'
         return false if (STDIN.gets.chomp != 'y')
         cards = FileReaderAPI.getCards(path)
@@ -28,7 +29,13 @@ class PGAPI
         @con.exec "CREATE TABLE Cards(id INTEGER PRIMARY KEY, question TEXT,answer TEXT, know INT)"
         cards.each_pair{|key, card|insert(key,card)}
     end
-
+    def writeFileFromPG(path)
+        path ||= "./Cards.json"
+        p "this will overwrite #{path}, are you sure?(y)"
+        return false if (STDIN.gets.chomp != 'y')
+        cards =getCards()
+        FileReaderAPI.write(path,cards)
+    end
     def insert(key,card)
         sql=<<-SQL
                 INSERT INTO Cards
