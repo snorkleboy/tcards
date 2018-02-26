@@ -8,6 +8,7 @@ require_relative './util/fileReaderAPI.rb'
 cards = {}
 writer = nil
 begin
+    # postgresql setup
     if ARGV[0] == "-p"
         database,username,password = ARGV[1] == '-w' || ARGV[1]  == 'm' ? [nil,nil,nil] : ARGV[1..3] 
         pg = PGAPI.new(database,username,password)
@@ -15,6 +16,7 @@ begin
         pg.writeFileFromPG(ARGV[5]) if ARGV[4]  == '-w' || ARGV[1] == '-w'
         cards= pg.getCards
         writer = pg
+    # filereader setup
     else
         path = ARGV[1] || './Cards.json'
         # path = File.join(File.dirname(__FILE__),path)
@@ -22,6 +24,7 @@ begin
         cards = fr.getCards
         writer = fr
     end
+    # writer gives flashcards a way to save new cards to whatever medium cards were made. 
     FlashCards.new(cards,writer).start
 rescue => exception
     p exception

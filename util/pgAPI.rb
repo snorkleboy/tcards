@@ -13,9 +13,7 @@ class PGAPI
 
     def connect(db,user,password)
         begin
-            @con = PG.connect :dbname => db, :user => user, 
-                :password => password
-            
+            @con = PG.connect :dbname => db, :user => user, :password => password            
         rescue PG::Error => e
             puts e.message      
         end
@@ -29,13 +27,7 @@ class PGAPI
         @con.exec "CREATE TABLE Cards(id INTEGER PRIMARY KEY, question TEXT,answer TEXT, know INT)"
         cards.each_pair{|key, card|insert(key,card)}
     end
-    def writeFileFromPG(path)
-        path ||= "./Cards.json"
-        p "this will overwrite #{path}, are you sure?(y)"
-        return false if (STDIN.gets.chomp != 'y')
-        cards =getCards()
-        FileReaderAPI.write(path,cards)
-    end
+
     def insert(key,card)
         sql=<<-SQL
                 INSERT INTO Cards
@@ -43,9 +35,18 @@ class PGAPI
                 VALUES
                 ($1,$2,$3,$4);
         SQL
-        @con.exec_params sql ,[key, card['question'], card['answer'], card['know']]
-
+        @con.exec_params (sql,[key, card['question'], card['answer'], card['know']])
     end
+
+
+    def writeFileFromPG(path)
+        path ||= "./Cards.json"
+        p "this will overwrite #{path}, are you sure?(y)"
+        return false if (STDIN.gets.chomp != 'y')
+        cards =getCards()
+        FileReaderAPI.write(path,cards)
+    end
+
 
     def getCards()
         cardsRAW = @con.exec("SELECT * FROM cards")
