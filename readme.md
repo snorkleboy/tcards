@@ -1,6 +1,6 @@
 # Tcards
 
-##start
+## start
 run tcards.rb, by default it will look for Cards.json to read from, otherwise you can call with -f flag and specify a file, or -p and specify a postgres db username password
 
 #### flags
