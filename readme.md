@@ -1,7 +1,7 @@
 # Tcards
 
 ## start
-run tcards.rb, by default it will look for Cards.json to read from, otherwise you can call with -f flag and specify a file, or -p and specify a postgres db username password
+run tcards.rb, by default it will look for ./Cards.json to read from, otherwise you can call with -f flag to specify a file, or -p and specify a postgres db username password
 
 #### flags
 - -f read from filepath. by default the program will look for ./Cards.json. You can set a custom path with -f pathname
